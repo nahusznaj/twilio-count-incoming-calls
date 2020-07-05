@@ -1,9 +1,16 @@
 from twilio.rest import Client
-import os
-from datetime import datetime, timedelta
 
-account_sid = os.environ['ACCOUNT_SID']
-auth_token = os.environ['AUTH_TOKEN']
+# Load .env file using:
+from dotenv import load_dotenv
+load_dotenv()
+
+# Use the variable with:
+import os
+account_sid = os.getenv("ACCOUNT_SID")
+auth_token = os.getenv("AUTH_TOKEN")
+
+
+from datetime import datetime, timedelta
 
 client = Client(account_sid, auth_token)
 
@@ -51,4 +58,4 @@ for record in calls:
 
 #print(TwilioNumber)
 
-print(f'Total count of calls made to {TwilioNumber} from {startTime.strftime("%H hs, %d-%m-%Y")} to {endTime.strftime("%H hs, %d-%m-%Y")}  is: {Count}')
+print(f'Total count of calls made to {TwilioNumber} from {timeRange[0].strftime("%H hs, %d-%m-%Y")} to {timeRange[1].strftime("%H hs, %d-%m-%Y")}  is: {Count}')

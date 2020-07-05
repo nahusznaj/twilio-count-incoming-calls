@@ -31,13 +31,55 @@ $ pip3 install -r requirements.txt
 
 This should install Twilio's [helper library for Python](https://www.twilio.com/docs/libraries/python), and `python-dotenv`. The latter will help with setting up and using environment variables for the script.
 
-Once the install is complete, populate the file `.env` with:
+Once the install is complete, let's set up the environment variables.
 
-- Account SID, which is shown in https://twilio.com/console
-- AuthToken, which is shown in https://twilio.com/console.
+Ah, you would need a Twilio account for this! If you don't have one, get one with this [referral link](www.twilio.com/referral/yrF7VV).
 
-Also, you can pass the Twilio number that you want to count the incoming calls.
+Now, from your Twilio console, copy the following:
 
-- Twilio Number. Your incoming phone numbers are in https://www.twilio.com/console/phone-numbers/incoming.
+- Account SID, which is shown in https://twilio.com/console, 
+- AuthToken, which is shown in https://twilio.com/console, and
 
-Ah, you would need a Twilio account for this! If you don't have one, open one with this [link](www.twilio.com/referral/yrF7VV).
+- Twilio number that you want to count the incoming calls. Your incoming phone numbers are in https://www.twilio.com/console/phone-numbers/incoming. This is optional! Just make sure the phone number you pass, is a number owned by the AccountSID used above.
+
+Once you have your authentication details to consume Twilio's APIs and the phone number you want to work with, you can populate the file.
+
+To this, first, copy the template into a `.env`:
+
+```
+$ cp .env.template .env
+```
+
+Then, edit the `.env`, you can do this with from the terminal with `nano .env`.
+
+Once you saved, with `command X` and confirm with `Y`, you need to source environmental varialbes, so
+
+```
+$ source .env
+```
+
+That's it.
+
+Now, in the terminal, run
+
+```
+$ python3 voice_call_logs.py
+```
+
+You'll be prompted to input the details and then you'll see the outcome with the count of calls. The expected timezone is CEST, the timezone of Central Europe in the Summer, which is 2 hours away from GMT. GMT is the timezone used (see the optional time properties, `start_time` and `end_time` in [Twilio docs](https://www.twilio.com/docs/voice/api/call-resource#read-multiple-call-resources)) and that's why I added a delta of 2 hours to adjust this.
+
+In my case, when I run the script I did:
+
+```
+(calls-venv) ~ $ python3 voice_call_logs.py
+Pass your start hour in CEST: 3
+Pass your start day (date number): 1
+Pass your start month: 1
+Pass your end hour in CEST: 5
+Pass your end day (date number): 5
+Pass your end month: 7
+Pass the Twilio number to count the calls made to it: +redacted
+Total count of calls made to +redacted from 03 hs, 01-01-2020 to 05 hs, 05-07-2020  is: 71
+```
+
+In this case, I didn't use the environmental variable! I will include this in future versions of this script.
