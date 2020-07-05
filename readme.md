@@ -12,7 +12,7 @@ Let's crack on.
 
 Create a folder, open a terminal and navigate to the folder.
 
-Create a virtual environment 
+Create a virtual environment, in my case, as you see in this repository, I called it calls-venv: 
 
 ```
 $ python3 -m venv calls-venv
