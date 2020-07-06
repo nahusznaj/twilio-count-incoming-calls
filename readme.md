@@ -12,7 +12,7 @@ Let's crack on.
 
 Create a folder, open a terminal and navigate to the folder.
 
-Create a virtual environment, in my case, as you see in this repository, I called it calls-venv: 
+Create a virtual environment, in my case, I called it calls-venv (not in the repository): 
 
 ```
 $ python3 -m venv calls-venv
@@ -23,17 +23,16 @@ Activate the virtual environment
 $ source calls-venv/bin/activate
 ```
 
-Install the requirements:
-
+Install the requirements with
 ```
 $ pip3 install -r requirements.txt
 ```
 
 This will install Twilio's [helper library for Python](https://www.twilio.com/docs/libraries/python), and `python-dotenv`. The latter library will help us with the environment variables for the script.
 
-Once the install is complete, let's set up the environment variables.
+Once the install is completed, let's set up the environment variables.
 
-Ah, you would need a Twilio account for this! If you don't have one, create one with this [referral link](www.twilio.com/referral/yrF7VV).
+Wait... you will need a Twilio account for this! If you don't have one, create one with my [referral link](www.twilio.com/referral/yrF7VV). And then purchase a Twilio number to make calls to. You can purchase a Twilio incoming phone number from [Console](https://www.twilio.com/console/phone-numbers/search).
 
 Now, from your Twilio console, copy the following:
 
@@ -42,10 +41,9 @@ Now, from your Twilio console, copy the following:
 
 - Twilio number that you want to count the incoming calls. Your incoming phone numbers are in https://www.twilio.com/console/phone-numbers/incoming. This is optional! Just make sure the phone number you pass, is a number owned by the AccountSID used above.
 
-Once you have your authentication details to consume Twilio's APIs and the phone number you want to work with, you can populate the file.
+Once you have your authentication details to consume Twilio's APIs and the Twilio phone number you want to work with, you can populate the file.
 
 To this, first, copy the template into a `.env`:
-
 ```
 $ cp .env.template .env
 ```
@@ -53,7 +51,6 @@ $ cp .env.template .env
 Then, edit the `.env`, you can do this with from the terminal with `nano .env`.
 
 Once you saved, with `command X` and confirm with `Y`, you need to source environmental varialbes, so
-
 ```
 $ source .env
 ```
@@ -86,8 +83,11 @@ In this case, I didn't use the environmental variable! I will include this in fu
 
 I've now added also a CSV writer. The idea is to add a new row with the Twilio number, the start time, the end time, and the number of incoming calls.
 
-To do:
+# To do:
 
+Things I will want to do in future
+
+- write a CSV file with the output: DONE.
 - enter a date range loop through, to create a week days report, and a weekend report.
 - include logic to try/catch whether the day is a weekend day or week day. Depending on what day it is, pass different hours. The idea is to be able to either pass a 7 days range, or "7 days prior to now", and count for weekend days in an hour range, and for another time of the day for week days.
 - Perhaps: embed this in a Flask application so that a user can navigate to a website, pass AccountSID, API Key and Secret, and phone number. There are security risks obviously involved, in sharing API Keys and Secret, so I'd need a way to ensure they are deleted as soon as the script is run and they are not stored anywhere else in the application.
