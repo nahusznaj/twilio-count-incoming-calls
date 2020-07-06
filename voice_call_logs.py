@@ -1,4 +1,5 @@
 from twilio.rest import Client
+import csv
 
 # Load .env file using:
 from dotenv import load_dotenv
@@ -51,10 +52,17 @@ calls = client.calls.list(
                         to=TwilioNumber
                         )
 
-
 Count = 0
 for record in calls:
     Count +=1
+
+file = 'call_logs_count.csv'
+
+
+with open(file, mode='a', newline='') as callsCSVfile:
+            callsCSVfilewriter = csv.writer(callsCSVfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            row = [TwilioNumber, startTime, endTime, Count]
+            callsCSVfilewriter.writerow(row)
 
 #print(TwilioNumber)
 
