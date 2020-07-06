@@ -29,11 +29,11 @@ Install the requirements:
 $ pip3 install -r requirements.txt
 ```
 
-This should install Twilio's [helper library for Python](https://www.twilio.com/docs/libraries/python), and `python-dotenv`. The latter will help with setting up and using environment variables for the script.
+This will install Twilio's [helper library for Python](https://www.twilio.com/docs/libraries/python), and `python-dotenv`. The latter library will help us with the environment variables for the script.
 
 Once the install is complete, let's set up the environment variables.
 
-Ah, you would need a Twilio account for this! If you don't have one, get one with this [referral link](www.twilio.com/referral/yrF7VV).
+Ah, you would need a Twilio account for this! If you don't have one, create one with this [referral link](www.twilio.com/referral/yrF7VV).
 
 Now, from your Twilio console, copy the following:
 
@@ -83,3 +83,11 @@ Total count of calls made to +redacted from 03 hs, 01-01-2020 to 05 hs, 05-07-20
 ```
 
 In this case, I didn't use the environmental variable! I will include this in future versions of this script.
+
+I've now added also a CSV writer. The idea is to add a new row with the Twilio number, the start time, the end time, and the number of incoming calls.
+
+To do:
+
+- enter a date range loop through, to create a week days report, and a weekend report.
+- include logic to try/catch whether the day is a weekend day or week day. Depending on what day it is, pass different hours. The idea is to be able to either pass a 7 days range, or "7 days prior to now", and count for weekend days in an hour range, and for another time of the day for week days.
+- Perhaps: embed this in a Flask application so that a user can navigate to a website, pass AccountSID, API Key and Secret, and phone number. There are security risks obviously involved, in sharing API Keys and Secret, so I'd need a way to ensure they are deleted as soon as the script is run and they are not stored anywhere else in the application.
