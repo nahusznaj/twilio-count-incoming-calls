@@ -139,3 +139,4 @@ cython_debug/
 
 calls-venv/
 .DS_Store
+call_logs_count.csv
