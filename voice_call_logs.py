@@ -1,3 +1,9 @@
+# This scrip will count number of incoming calls in a given set of start and end hours, and write the findings in a CSV file
+# the user is required to input the date of the month, and the month
+
+
+
+
 from twilio.rest import Client
 import csv
 
@@ -47,15 +53,15 @@ dummyDatetime = datetime(2020, Month, Day)
 DayOfWeek = dummyDatetime.weekday()
 
 
-startHour = [8, 18]
-endHour = [9, 22]
-startHourWeekend = [8]
-endHourWeekend = [22]
+startHourWeekDay = [8, 18] #add/edit your preferred pairs of start/end hours for week days
+endHourWeekDay = [9, 22]
+startHourWeekendDay = [8] # add/edit your preferred pairs of start/end hours for weekend days
+endHourWeekendDay = [22]
 
 if DayOfWeek in weekDay: # count for week days hour ranges
-    if len(startHour) == len(endHour):
-        for idx, val in enumerate(startHour): 
-            timeRanges = timeRangeFunction(startHour[idx], Day, Month, endHour[idx], Day, Month)
+    if len(startHourWeekDay) == len(endHourWeekDay):
+        for idx, val in enumerate(startHourWeekDay): 
+            timeRanges = timeRangeFunction(startHourWeekDay[idx], Day, Month, endHourWeekDay[idx], Day, Month)
             
             startTime= timeRanges[0] - timedelta(hours=2)
             endTime = timeRanges[1] - timedelta(hours=2)
@@ -84,9 +90,9 @@ if DayOfWeek in weekDay: # count for week days hour ranges
 
 
 else: #count for weekend days hour ranges
-    if len(startHourWeekend) == len(endHourWeekend):
-        for idx, val in enumerate(startHourWeekend): 
-            timeRanges = timeRangeFunction(startHourWeekend[idx], Day, Month, endHourWeekend[idx], Day, Month)
+    if len(startHourWeekendDay) == len(endHourWeekendDay):
+        for idx, val in enumerate(startHourWeekendDay): 
+            timeRanges = timeRangeFunction(startHourWeekendDay[idx], Day, Month, endHourWeekendDay[idx], Day, Month)
             
             startTime= timeRanges[0] - timedelta(hours=2)
             endTime = timeRanges[1] - timedelta(hours=2)
